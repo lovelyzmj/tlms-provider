@@ -19,7 +19,7 @@
     </insert>
 
     <select id="getOne" resultMap="BaseResultMap">
-        select * from users where user_name = #{userName} and passWord = #{passWord}
+        select * from users where user_name = #{userName} and pass_word = #{passWord}
     </select>
 
     <select id="findOneByRealName" parameterType="java.lang.String" resultMap="BaseResultMap">
