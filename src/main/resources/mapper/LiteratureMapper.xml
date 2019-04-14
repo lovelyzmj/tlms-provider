@@ -27,4 +27,8 @@
         insert into literature_research_contact (literature_id,research_id) values (#{literatureId},#{researchId})
     </insert>
 
+    <select id="findLiteratureByNameAndResearchId" resultType="com.xupt.tlms.pojo.Literature" >
+        SELECT * from literature where name = #{name} and id in (SELECT literature_id from literature_research_contact where research_id = #{researchId})
+    </select>
+
 </mapper>

@@ -78,4 +78,11 @@ public class LiteratureServiceImpl implements LiteratureService {
     public boolean updateLiterature(Literature literature) {
         return false;
     }
+
+    @Override
+    public boolean getLiteratureByNameAndResearchId(String name, int researchId) {
+        if (literatureDao.findLiteratureByNameAndResearchId(name,researchId) == null)
+            return false;
+        return true;
+    }
 }

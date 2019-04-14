@@ -12,4 +12,5 @@ public interface LiteratureDao {
    Literature findOneById(int id);
    int insert(Literature literature);
    int insertLiteratureAndResearch(@Param("literatureId") int literatureId,@Param("researchId") int researchId);
+   Literature findLiteratureByNameAndResearchId(@Param("name") String name,@Param("researchId") int researchId);
 }
