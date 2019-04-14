@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xupt.tlms.tlmsprovider.Dao.TeamDao">
+
+    <resultMap id="BaseResultMap" type="com.xupt.tlms.vojo.TeamVo">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name"  />
+        <result column="brief" property="brief" />
+        <result column="creater_name" property="createrName"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.xupt.tlms.pojo.Team" useGeneratedKeys="true" keyProperty="id">
+        insert into teams (name,brief,creater_id,create_time) values (#{name},#{brief},#{createrId},#{createTime})
+    </insert>
+
+    <select id="findOneById" parameterType="int" resultMap="BaseResultMap">
+     SELECT a.id,a.name,a.brief,b.real_name creater_name, a.create_time from teams a , users b where a.creater_id = b.id and a.id = #{id}
+    </select>
+
+    <insert id="addTeam">
+        insert into user_team_contact (user_id,team_id) values (#{userId},#{teamId})
+    </insert>
+
+    <delete id="quitTeam">
+        delete from user_team_contact where user_id = #{userId} and team_id = #{teamId}
+    </delete>
+
+    <delete id="deleteTeam" parameterType="int">
+        delete from teams where id = #{id}
+    </delete>
+
+    <select id="findAllTeamByUserId" resultMap="BaseResultMap">
+       SELECT a.id,a.name,a.brief,b.real_name creater_name, a.create_time  from teams a , users b where a.creater_id = b.id  and a.id in (select team_id from user_team_contact where user_id = #{userId} )
+    </select>
+
+
+</mapper>

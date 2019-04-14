@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xupt.tlms.tlmsprovider.Dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="com.xupt.tlms.pojo.User">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_name" property="userName"  />
+        <result column="pass_word" property="passWord" />
+        <result column="real_name" property="realName" />
+        <result column="nick_name" property="nickName" />
+        <result column="telePhone" property="telePhone" />
+        <result column="email" property="email" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <insert id="insert" parameterType="com.xupt.tlms.pojo.User">
+        insert into users (user_name,pass_word,real_name,nick_name,telePhone,email,remark)values (#{userName},#{passWord},#{realName},#{nickName},#{telePhone},#{email},#{remark})
+    </insert>
+
+    <select id="getOne" resultMap="BaseResultMap">
+        select * from users where user_name = #{userName} and passWord = #{passWord}
+    </select>
+
+    <select id="findOneByRealName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from users where real_name = #{realName}
+    </select>
+
+    <select id="finOneByUserId" parameterType="int" resultMap="BaseResultMap">
+        select * from users where id = #{id}
+    </select>
+
+
+    <update id="update" parameterType="com.xupt.tlms.pojo.User">
+        UPDATE
+        users
+        SET
+        <if test="passWord != null">pass_word = #{passWord},</if>
+        <if test="realName != null">real_name = #{realName},</if>
+        <if test="nickName != null">nick_name = #{nickName},</if>
+        <if test="telePhone != null">telePhone = #{telePhone},</if>
+        <if test="email != null">email = #{email},</if>
+        <if test="remark != null">remark = #{remark},</if>
+        WHERE
+        id = #{id}
+    </update>
+
+        <select id="getAllUser" resultMap="BaseResultMap">
+            select * from users where id in (select user_id from user_team_contact where team_id = #{teamId})
+        </select>
+
+
+</mapper>

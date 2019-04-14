@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xupt.tlms.tlmsprovider.Dao.ResearchDao">
+
+    <resultMap id="BaseResultMap" type="com.xupt.tlms.vojo.ResearchVo">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="name"  />
+        <result column="brief" property="brief" />
+        <result column="team_name" property="teamName" />
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.xupt.tlms.pojo.Research" useGeneratedKeys="true" keyProperty="id">
+        insert into teams (name,brief,team_id,create_time) values (#{name},#{brief},#{teamId},#{createTime})
+    </insert>
+    <select id="findAllByUserId" parameterType="int" resultMap="BaseResultMap">
+    select a.id,a.name,a.brief,b.name team_name,a.create_time from research a, teams b
+    where a.team_id  = b.id  and a.team_id in (SELECT team_id  from user_team_contact where user_id = #{userId} )
+    </select>
+    <update id="updateResearch" parameterType="com.xupt.tlms.pojo.Research">
+        update research set
+        <if test="name != null">name = #{name},</if>
+        <if test="brief != null">brief = #{brief},</if>
+        where id = #{id}
+    </update>
+    <delete id="deleteResearch" parameterType="int">
+        delete from research where id = #{id}
+    </delete>
+
+
+</mapper>
