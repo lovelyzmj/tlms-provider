@@ -16,6 +16,15 @@
     <select id="findAllByResearchId" parameterType="int" resultMap="BaseResultMap">
         SELECT * FROM literature WHERE id in (select literature_id from literature_research_contact where research_id = #{researchId})
     </select>
-
+    <select id="findOneById" parameterType="int" resultType="com.xupt.tlms.pojo.Literature">
+        select * from literature where id = #{id}
+    </select>
+    <insert id="insert" parameterType="com.xupt.tlms.pojo.Literature" useGeneratedKeys="true" keyProperty="id">
+        insert  into literature (name,author,year,time,path,remarks)
+        values (#{name},#{author},#{year},#{time},#{path},#{remarks})
+    </insert>
+    <insert id="insertLiteratureAndResearch" >
+        insert into literature_research_contact (literature_id,research_id) values (#{literatureId},#{researchId})
+    </insert>
 
 </mapper>

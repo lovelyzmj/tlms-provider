@@ -10,16 +10,32 @@
         <result column="literature_id" property="literatureId"/>
         <result column="literature_name" property="literatureName"/>
         <result column="create_time" property="createTime"/>
+        <result column="comment_num" property="commentNum"/>
         <result column="status" property="status"/>
     </resultMap>
 
     <select id="findSelfNotes" parameterType="int" resultMap="BaseResultMap">
-        SELECT a.*,b.nick_name,c.name literature_name from notes a , users b , literature c where a.user_id = #{userId} and a.user_id = b.id and a.literature_id = c.id
+        select * from
+(SELECT a.*,b.nick_name,c.name literature_name from notes a , users b , literature c   where a.user_id = #{userId} and a.user_id = b.id and a.literature_id = c.id) E
+ LEFT JOIN (select notes_id ,COUNT(*) comment_num from `comment` d GROUP BY notes_id) F ON F.notes_id = E.id
+
     </select>
+
     <insert id="insert" parameterType="com.xupt.tlms.pojo.Notes">
         insert into notes
         (content,user_id,literature_id,create_time,status)
         values (#{content},#{userId},#{literatureId},#{createTime},#{status})
     </insert>
+
+    <select id="findNotesByliteratureId" parameterType="int" resultMap="BaseResultMap">
+ select * from
+(SELECT a.*,b.nick_name,c.name literature_name from notes a , users b , literature c   where a.literature_id  = #{literatureId} and a.user_id = b.id and a.literature_id = c.id) E
+LEFT JOIN (select notes_id ,COUNT(*) comment_num from `comment` d GROUP BY notes_id) F ON F.notes_id = E.id
+    </select>
+    
+    <update id="update" parameterType="com.xupt.tlms.pojo.Notes">
+        update notes set content = #{content}
+    </update>
+
 </mapper>
 

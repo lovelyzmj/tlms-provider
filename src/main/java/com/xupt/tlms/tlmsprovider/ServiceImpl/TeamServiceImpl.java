@@ -55,7 +55,6 @@ public class TeamServiceImpl implements TeamService
 
     @Override
     public List<TeamVo> findAllTeamByUserId(int userId) {
-
         List<TeamVo> list = teamDao.findAllTeamByUserId(userId);
         if (list == null || list.size() == 0)
             return null;

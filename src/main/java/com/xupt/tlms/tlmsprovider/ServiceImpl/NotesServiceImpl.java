@@ -34,7 +34,10 @@ public class NotesServiceImpl implements NotestService {
 
     @Override
     public boolean updateNotes(Notes notes) {
-        return false;
+        if (notesDao.update(notes) == 0){
+            return false;
+        }
+        return true;
     }
 
     @Override
