@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper
 public interface KeyWordDao {
-    int insert(String name);
+    int insert(KeyWord keyWord);
     List<KeyWord> findByName(String name);//模糊查询
     List<KeyWord> findAllByLiteratureId(int literatureId);
     KeyWord findById(int id);//根据id查找关键字

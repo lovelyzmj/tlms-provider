@@ -13,7 +13,7 @@
             literature_id = #{literatureId})
    </select>
 
-    <insert id="insert" parameterType="java.lang.String" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.xupt.tlms.pojo.KeyWord" useGeneratedKeys="true" keyProperty="id">
         insert into keyword (name) values (#{name})
     </insert>
     

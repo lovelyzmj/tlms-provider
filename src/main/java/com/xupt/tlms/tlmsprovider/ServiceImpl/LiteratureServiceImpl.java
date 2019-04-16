@@ -40,10 +40,13 @@ public class LiteratureServiceImpl implements LiteratureService {
                     return false;
                 }
             }else {
-                if (keyWordDao.insert(list.get(i).getName()) == 0) {
+                KeyWord keyWord = new KeyWord();
+                System.out.println(list.get(i).getName());
+                keyWord.setName(list.get(i).getName());
+                if (keyWordDao.insert(keyWord) == 0) {
                     return false;
                 }
-                if (keyWordDao.insertKeyWordAndLiterature(list.get(i).getId(), literature.getId()) == 0) {
+                if (keyWordDao.insertKeyWordAndLiterature(keyWord.getId(), literature.getId()) == 0) {
                     return false;
                 }
             }
