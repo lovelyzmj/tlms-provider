@@ -35,21 +35,24 @@ public class LiteratureServiceImpl implements LiteratureService {
         }
 
         for (int i = 0 ; i<list.size();i++){
-            if (list.get(i).getId() != 0){
-                if (keyWordDao.insertKeyWordAndLiterature(list.get(i).getId(),literature.getId()) == 0) {
-                    return false;
-                }
-            }else {
-                KeyWord keyWord = new KeyWord();
-                System.out.println(list.get(i).getName());
-                keyWord.setName(list.get(i).getName());
-                if (keyWordDao.insert(keyWord) == 0) {
-                    return false;
-                }
-                if (keyWordDao.insertKeyWordAndLiterature(keyWord.getId(), literature.getId()) == 0) {
-                    return false;
-                }
+            if (keyWordDao.insertKeyWordAndLiterature(list.get(i).getId(),literature.getId()) == 0) {
+                return false;
             }
+//            if (list.get(i).getId() != 0){
+//                if (keyWordDao.insertKeyWordAndLiterature(list.get(i).getId(),literature.getId()) == 0) {
+//                    return false;
+//                }
+//            }else {
+//                KeyWord keyWord = new KeyWord();
+//                System.out.println(list.get(i).getName());
+//                keyWord.setName(list.get(i).getName());
+//                if (keyWordDao.insert(keyWord) == 0) {
+//                    return false;
+//                }
+//                if (keyWordDao.insertKeyWordAndLiterature(keyWord.getId(), literature.getId()) == 0) {
+//                    return false;
+//                }
+//            }
         }
         return true;
     }

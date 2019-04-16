@@ -32,5 +32,10 @@ and a.user_id = b.id and a.notes_id = c.id
     <delete id="delete" parameterType="int">
         delete from comment where id = #{id}
     </delete>
+    <select id="findById" parameterType="int" resultMap="BaseResultMap">
+        select * from
+ (select * from `comment` where id = #{id}) A join (select * from users ) B on A.user_id = B.id
+	join (select * from notes) C on A.notes_id = C.id
+    </select>
 </mapper>
 

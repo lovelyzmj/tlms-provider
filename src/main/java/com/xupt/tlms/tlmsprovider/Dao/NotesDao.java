@@ -12,4 +12,5 @@ public interface NotesDao {
     List<NotesVo> findSelfNotes(int userId);
     List<NotesVo> findNotesByliteratureId(int literatureId);
     int update(Notes notes);
+    NotesVo findById(int id);
 }

@@ -15,4 +15,5 @@ public interface CommentDao {
     List<CommentVo> findMyComment(int userId);
 
     int delete (int id);
+    CommentVo findById(int id);
 }

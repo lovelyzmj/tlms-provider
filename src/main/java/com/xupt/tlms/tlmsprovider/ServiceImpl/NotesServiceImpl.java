@@ -41,7 +41,12 @@ public class NotesServiceImpl implements NotestService {
     }
 
     @Override
-    public boolean deleteNotes(int i) {
+    public boolean deleteNotes(int id) {
         return false;
+    }
+
+    @Override
+    public NotesVo getById(int id) {
+        return notesDao.findById(id);
     }
 }

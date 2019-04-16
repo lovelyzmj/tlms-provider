@@ -36,6 +36,10 @@ LEFT JOIN (select notes_id ,COUNT(*) comment_num from `comment` d GROUP BY notes
     <update id="update" parameterType="com.xupt.tlms.pojo.Notes">
         update notes set content = #{content}
     </update>
-
+    <select id="findById" parameterType="int" resultMap="BaseResultMap">
+        select * from
+        (select * from notes where id = #{id}) A join (select * from users ) B on A.user_id = B.id
+        join (select * from literature) C on A.literature_id = C.id
+    </select>
 </mapper>
 

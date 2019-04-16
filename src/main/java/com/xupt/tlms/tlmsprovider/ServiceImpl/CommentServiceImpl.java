@@ -45,4 +45,9 @@ public class CommentServiceImpl implements CommentService {
         }
         return true;
     }
+
+    @Override
+    public CommentVo getById(int id) {
+        return commentDao.findById(id);
+    }
 }
