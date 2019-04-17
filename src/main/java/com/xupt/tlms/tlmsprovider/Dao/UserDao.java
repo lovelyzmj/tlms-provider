@@ -23,4 +23,5 @@ public interface UserDao {
 
     List<User> getAllUser(@Param("teamId") int teamId);
 
+    User findByUserName(String userName);
 }

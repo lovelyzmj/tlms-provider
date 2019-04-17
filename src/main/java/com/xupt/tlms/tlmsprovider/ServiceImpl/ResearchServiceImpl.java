@@ -46,4 +46,9 @@ public class ResearchServiceImpl implements ResearchService {
             return false;
         return true;
     }
+
+    @Override
+    public ResearchVo getResearchById(int id) {
+        return researchDao.findOneById(id);
+    }
 }

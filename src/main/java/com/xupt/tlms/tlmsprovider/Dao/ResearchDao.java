@@ -12,4 +12,5 @@ public interface ResearchDao {
     int updateResearch(Research research);
     int deleteResearch(int id);
     List<ResearchVo> findAllByUserId(int userId);
+    ResearchVo findOneById(int id);
 }

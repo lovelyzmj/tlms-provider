@@ -34,13 +34,14 @@
     <update id="update" parameterType="com.xupt.tlms.pojo.User">
         UPDATE
         users
-        SET
+        <trim prefix="set" suffixOverrides=",">
         <if test="passWord != null">pass_word = #{passWord},</if>
         <if test="realName != null">real_name = #{realName},</if>
         <if test="nickName != null">nick_name = #{nickName},</if>
         <if test="telePhone != null">telePhone = #{telePhone},</if>
         <if test="email != null">email = #{email},</if>
         <if test="remark != null">remark = #{remark},</if>
+        </trim>
         WHERE
         id = #{id}
     </update>
@@ -48,6 +49,9 @@
         <select id="getAllUser" resultMap="BaseResultMap">
             select * from users where id in (select user_id from user_team_contact where team_id = #{teamId})
         </select>
+    <select id="findByUserName" parameterType="java.lang.String" resultType="com.xupt.tlms.pojo.User">
+        select * from users where user_name = #{userName}
+    </select>
 
 
 </mapper>
