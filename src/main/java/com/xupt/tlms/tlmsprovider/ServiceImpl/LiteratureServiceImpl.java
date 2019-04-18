@@ -91,4 +91,38 @@ public class LiteratureServiceImpl implements LiteratureService {
             return false;
         return true;
     }
+
+    @Override
+    public List<Literature> getLiteratureByName(String name) {
+        List<Literature> list = literatureDao.findLiteratureByName(name);
+        if (list == null || list.size() == 0)
+            return null;
+        return list;
+    }
+
+    @Override
+    public List<Literature> getLiteratureByAuthor(String author) {
+        List<Literature> list = literatureDao.findLiteratureByAuthor(author);
+        if (list == null || list.size() == 0)
+            return null;
+        return list;
+    }
+
+    @Override
+    public List<Literature> getLiteratureByKeyWord(String keyWord) {
+        List<Literature> list = literatureDao.findLiteratureByKeyWord(keyWord);
+        if (list == null || list.size() == 0)
+            return null;
+        return list;
+    }
+
+    @Override
+    public boolean updateLiteratureStatus(int id, int status) {
+        return literatureDao.updateLiteratureStatus(id,status);
+    }
+
+    @Override
+    public List<Literature> getLiteratureByUserId(int userId) {
+        return null;
+    }
 }

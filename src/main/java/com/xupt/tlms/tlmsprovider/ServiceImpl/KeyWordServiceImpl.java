@@ -1,12 +1,13 @@
 package com.xupt.tlms.tlmsprovider.ServiceImpl;
 
+import com.alibaba.dubbo.config.annotation.Service;
 import com.xupt.tlms.pojo.KeyWord;
 import com.xupt.tlms.service.KeyWordService;
 import com.xupt.tlms.tlmsprovider.Dao.KeyWordDao;
 
 import javax.annotation.Resource;
 import java.util.List;
-
+@Service
 public class KeyWordServiceImpl implements KeyWordService {
     @Resource
     private KeyWordDao keyWordDao;
