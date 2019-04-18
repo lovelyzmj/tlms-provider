@@ -21,6 +21,7 @@ public class TeamServiceImpl implements TeamService
         if (flag == 0)
             return null;
         System.out.println(team);
+        teamDao.addTeam(team.getCreaterId(),team.getId());
         return team;
     }
 

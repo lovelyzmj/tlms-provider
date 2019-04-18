@@ -12,7 +12,7 @@
     </resultMap>
 
     <insert id="insert" parameterType="com.xupt.tlms.pojo.Research" useGeneratedKeys="true" keyProperty="id">
-        insert into teams (name,brief,team_id,create_time) values (#{name},#{brief},#{teamId},#{createTime})
+        insert into research (name,brief,team_id,create_time) values (#{name},#{brief},#{teamId},#{createTime})
     </insert>
     <select id="findAllByUserId" parameterType="int" resultMap="BaseResultMap">
     select a.id,a.name,a.brief,b.name team_name,a.create_time from research a, teams b
